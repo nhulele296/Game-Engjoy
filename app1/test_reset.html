@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Password Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .debug-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h2>Test Password Reset Email</h2>
+    <form id="resetForm">
+        <input type="email" id="email" value="agowilt.nhule@gmail.com" style="width: 250px;">
+        <button type="submit">Send Reset Email</button>
+    </form>
+    <div id="debug" class="debug-output"></div>
+
+    <script>
+        document.getElementById('resetForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('email', document.getElementById('email').value);
+            
+            document.getElementById('debug').textContent = 'Sending request...';
+            
+            fetch('request_reset.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('debug').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('debug').textContent = 'Error: ' + error.message;
+            });
+        };
+    </script>
+</body>
+</html> 

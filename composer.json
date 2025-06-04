@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/mailer": "^6.0",
+        "symfony/google-mailer": "^6.0",
+        "phpmailer/phpmailer": "^6.8"
+    }
+} 
